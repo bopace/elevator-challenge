@@ -18,9 +18,10 @@ class Elevator {
     this.maxFloor = maxFloor
 
     this.emitter // todo: initialize emitter
+    this.listener // todo: initialize listener
 
     this.state = {
-      tripCount: 0,
+      tripCount: 0,   // i'm considering 'trip' to mean a passenger took a ride
       floorsPassed: 0,
       currentFloor: 1,
       passengerCount: 0,
@@ -38,7 +39,9 @@ class Elevator {
       this.moveUp()
       if (this.state.destinations.includes(this.state.currentFloor)) {
         this.openDoor()
-        // remove from destinations
+        this.state.destinations = this.state.destinations.filter(dest => {
+          dest !== this.state.currentFloor
+        })
       }
     }
 
@@ -48,35 +51,39 @@ class Elevator {
       this.moveDown()
       if (this.state.destinations.includes(this.state.currentFloor)) {
         this.openDoor()
-        // remove from destinations
+        this.state.destinations = this.state.destinations.filter(dest => {
+          dest !== this.state.currentFloor
+        })
       }
     }
   }
 
   moveUp() {
-    emitter.emit(
+    this.emitter.emit(
       'moveFloor',
       this.id,
       this.state.currentFloor,
       this.state.currentFloor + 1,
       ELEVATOR_DIRECTION.UP
     )
-    this.state.currentFloor += 1
+    this.state.currentFloor++
+    this.state.floorsPassed++
   }
 
   moveDown() {
-    emitter.emit(
+    this.emitter.emit(
       'moveFloor',
       this.id,
       this.state.currentFloor,
       this.state.currentFloor - 1,
       ELEVATOR_DIRECTION.DOWN
     )
-    this.state.currentFloor -= 1
+    this.state.currentFloor--
+    this.state.floorsPassed++
   }
 
   openDoor() {
-    emitter.emit('openDoors', this.id, this.state.currentFloor)
+    this.emitter.emit('openDoors', this.id, this.state.currentFloor)
   }
 
   handleAddPassenger(elevatorId, passengerId) {
@@ -87,14 +94,19 @@ class Elevator {
     // todo
   }
 
+  handleRemovePassenger(elevatorId, passengerId) {
+    // todo
+  }
+
   handleServiceElevator(elevatorId) {
     // todo
   }
 
   initializeListeners() {
     // todo: pull in EventEmitter2
-    listener.on('addPassenger', this.handleAddPassenger)
-    listener.on('addDestination', this.handleAddDestination)
-    listener.on('serviceElevator', this.handleServiceElevator)
+    this.listener.on('addPassenger', this.handleAddPassenger)
+    this.listener.on('addDestination', this.handleAddDestination)
+    this.listener.on('serviceElevator', this.handleServiceElevator)
+    this.listener.on('removePassenger', this.handleRemovePassenger)
   }
 }

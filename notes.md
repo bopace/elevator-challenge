@@ -3,7 +3,7 @@ use event-driven system (todo: define events needed, what parts listen for what 
 
 ## elevator controller
 ### events to listen for
-- `callElevator(passengerId, floor, direction [up or down])`
+- `callElevator(passengerId, floor, targetFloor)`
   - determine which elevator should be sent
   - emit an `addDestination` event to an elevator (`addDestination(elevatorId, floor)`)
 - `moveFloor(elevatorId, startFloor, endFloor, direction)`

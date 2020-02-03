@@ -4,6 +4,9 @@ class ElevatorController {
     this.elevatorCount = elevatorCount
     this.floorCount = floorCount
 
+    this.emitter // todo: initialize emitter
+    this.listener // todo: initialize listener
+
     this.state = {
       elevators: this.initializeElevators(elevatorCount)
     }
@@ -17,8 +20,9 @@ class ElevatorController {
     return elevators
   }
 
-  handleCallElevator(passengerId, floor, direction) {
-    // todo
+  handleCallElevator(floor, targetFloor) {
+    const bestElevator = findBestElevator(floor)
+    this.emitter.emit('addDestination', bestElevator, targetFloor)
   }
 
   handleMoveFloor(elevatorId, startFloor, endFloor, direction) {
@@ -39,11 +43,11 @@ class ElevatorController {
 
   initializeListeners() {
     // todo: pull in EventEmitter2
-    listener.on('callElevator', this.handleCallElevator)
-    listener.on('moveFloor', this.handleMoveFloor)
-    listener.on('openDoor', this.handleOpenDoor)
-    listener.on('closeDoor', this.handleCloseDoor)
-    listener.on('requestService', this.handleRequestService)
+    this.listener.on('callElevator', this.handleCallElevator)
+    this.listener.on('moveFloor', this.handleMoveFloor)
+    this.listener.on('openDoor', this.handleOpenDoor)
+    this.listener.on('closeDoor', this.handleCloseDoor)
+    this.listener.on('requestService', this.handleRequestService)
   }
 
   // takes the floor elevator is needed, returns id of best elevator
