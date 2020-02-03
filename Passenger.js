@@ -4,11 +4,15 @@ const PASSENGER_STATUS = {
 }
 
 class Passenger {
-  constructor() {
+  constructor(id) {
+    this.id = id
+    
     this.state = {
       location: 1,          // where the passenger currently is
       destination: 1,       // where the passenger wants to go
       status: PASSENGER_STATUS.WAITING
     }
   }
+
+  // add event listeners...
 }

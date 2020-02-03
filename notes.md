@@ -5,6 +5,13 @@ use event-driven system (todo: define events needed, what parts listen for what 
 ### events to listen for
 - `callElevator(passengerId, floor, direction [up or down])`
   - determine which elevator should be sent
+- `moveFloor(elevatorId, startFloor, endFloor, direction)`
+  - update internal state (which elevator is where)
+  - print notice ('Elevator {elevatorId} has moved from floor {startFloor} to floor {endFloor} (moving {direction})')
+- `openDoor(elevatorId, floor)`
+  - print notice ('Elevator {elevatorId} has opened its doors on floor {floor}')
+- `closeDoor(elevatorId, floor)`
+  - print notice ('Elevator {elevatorId} has opened its doors on floor {floor}')
 ### data
 - number of elevators
 - number of floors
@@ -20,6 +27,9 @@ use event-driven system (todo: define events needed, what parts listen for what 
   - service an elevator
 
 ## elevator
+### events to listen for
+- `addDestination(elevatorId, floor)`
+  - if the elevator is moving, simply add the destination to the list of destinations. if the elevator is on standby, start moving towards the destination
 ### state
 - number of trips taken (what is a trip?)
 - number of floors passed
@@ -34,6 +44,8 @@ use event-driven system (todo: define events needed, what parts listen for what 
 - close doors
 
 ## passenger
+### events to listen for
+- todo...
 ### state
 - location (what floor are you on)
 - destination (what floor do you want to go to)

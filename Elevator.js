@@ -8,7 +8,9 @@ const ELEVATOR_STATUS = {
 }
 
 class Elevator {
-  constructor() {
+  constructor(id) {
+    this.id = id
+    
     this.state = {
       tripCount: 0,
       floorsPassed: 0,
@@ -18,4 +20,6 @@ class Elevator {
       status: PASSENGER_STATUS.STANDBY
     }
   }
+
+  // add event listeners...
 }
