@@ -6,7 +6,7 @@ const PASSENGER_STATUS = {
 class Passenger {
   constructor(id) {
     this.id = id
-    
+
     this.state = {
       location: 1,          // where the passenger currently is
       destination: 1,       // where the passenger wants to go
@@ -14,5 +14,12 @@ class Passenger {
     }
   }
 
-  // add event listeners...
+  handleOpenDoors(elevatorId, floor) {
+    // todo
+  }
+
+  initializeListeners() {
+    // todo: pull in EventEmitter2
+    listener.on('openDoors', this.handleOpenDoors)
+  }
 }

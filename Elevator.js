@@ -10,7 +10,7 @@ const ELEVATOR_STATUS = {
 class Elevator {
   constructor(id) {
     this.id = id
-    
+
     this.state = {
       tripCount: 0,
       floorsPassed: 0,
@@ -21,5 +21,22 @@ class Elevator {
     }
   }
 
-  // add event listeners...
+  handleAddPassenger(elevatorId, passengerId) {
+    // todo
+  }
+  
+  handleAddDestination(elevatorId, floor) {
+    // todo
+  }
+
+  handleServiceElevator(elevatorId) {
+    // todo
+  }
+
+  initializeListeners() {
+    // todo: pull in EventEmitter2
+    listener.on('addPassenger', this.handleAddPassenger)
+    listener.on('addDestination', this.handleAddDestination)
+    listener.on('serviceElevator', this.handleServiceElevator)
+  }
 }
