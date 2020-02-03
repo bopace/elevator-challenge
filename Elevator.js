@@ -8,8 +8,11 @@ const ELEVATOR_STATUS = {
 }
 
 class Elevator {
-  constructor(id) {
+  constructor(id, maxFloor) {
     this.id = id
+    this.maxFloor = maxFloor
+
+    this.emitter // todo: initialize emitter
 
     this.state = {
       tripCount: 0,
@@ -19,6 +22,12 @@ class Elevator {
       destinations: [],     // what stops does the elevator still need to make?
       status: PASSENGER_STATUS.STANDBY
     }
+  }
+
+  moveToFloor(floor) {
+    if (floor < 1 || floor > this.maxFloor) throw `Elevator ${this.id} is trying to move to an invalid floor.`
+    // while 
+    emitter.emit('moveFloor')
   }
 
   handleAddPassenger(elevatorId, passengerId) {

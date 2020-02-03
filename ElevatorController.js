@@ -1,12 +1,20 @@
-export default class ElevatorController {
-  constructor(elevatorCount, floorCount) {
+class ElevatorController {
+  constructor(elevatorCount = 1, floorCount = 1) {
+    // todo: validate elevator and floor count values
     this.elevatorCount = elevatorCount
     this.floorCount = floorCount
 
     this.state = {
-      // to do...
-      elevators: []
+      elevators: this.initializeElevators(elevatorCount)
     }
+  }
+
+  initializeElevators(count) {
+    let elevators = []
+    for (let i = 1; i <= count; i++) {
+      elevators.push(new Elevator(i, this.floorCount))
+    }
+    return elevators
   }
 
   handleCallElevator(passengerId, floor, direction) {
