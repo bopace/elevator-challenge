@@ -1,9 +1,15 @@
 # elevator challenge
+use event-driven system (todo: define events needed, what parts listen for what events)
 
 ## elevator controller
+### events to listen for
+- `callElevator(passengerId, floor, direction [up or down])`
+  - determine which elevator should be sent
 ### data
 - number of elevators
 - number of floors
+### state
+- keep track of where the elevators are, if they need service, etc
 ### functions
 - receives calls from elevator passengers (up or down)
 - determines which elevator will pick up the passenger
@@ -20,7 +26,7 @@
 - current floor
 - number of passengers
 - destinations
-- status (MOVING_UP, MOVING_DOWN, STANDBY, NEEDS_SERVICE, OPENING_DOORS, DOORS_OPEN, DOORS_CLOSED)
+- status (MOVING_UP, MOVING_DOWN, STANDBY, NEEDS_SERVICE, DOORS_OPEN, DOORS_CLOSED)
 ### functions
 - move up one floor
 - move down one floor
